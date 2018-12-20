@@ -1,0 +1,170 @@
+
+.aui #breadcrumbs {
+    margin-bottom: 0;
+}
+
+ .aui .row-fluid [class*="span"]{
+	min-height: auto;
+	margin-bottom:1px;
+} 
+
+.modal-dialog{
+    overflow-y: initial !important
+}
+
+.modal-body{
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.aui .btn {
+	font-size: 14px;
+ 	padding: 4px 12px;
+	width: auto;
+	margin-top: 0px;
+	display: inline;
+}
+
+.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
+    height: 30px;
+    padding: 0 0 0 5px;
+    font-size: 14px;
+}
+
+
+/* Modal action plan START */
+.boxActionPlainArea .boxActionL{
+	margin-top: 3px;
+}
+.boxTargetArea{
+	width:27%;
+	float:left;
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	margin-top:3px;
+  	padding:5px;
+  	height: 89px;
+  	background:#fff;
+
+}
+.boxForecastArea{
+	width:28.5%;
+	float:right;
+}
+.boxActualPercentageArea{
+	width:39%;
+	float:right;
+	margin-left: 0.5%;
+}
+
+.fontBold{
+	font-weight:bold;
+}
+
+.boxForecastVsActual{
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	padding:3.5px;
+  	background:#fff;
+  	margin-top:3px;
+  	height: 40px;
+}
+
+.fontCenter{
+	text-align:center;
+}
+
+.actionPlanList{
+	padding:5px;
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	margin-bottom:3px;
+  	font-weight: bold;
+  	background:#fff;
+  	/*height: 37.5px;*/
+  	min-height: 37.5px;
+}
+
+.boxTargetData{
+	padding-top:20px;
+}
+
+.aui .portlet-msg-alert, .aui .portlet-msg-error, .aui .portlet-msg-help, .aui .portlet-msg-info, .aui .portlet-msg-progress, .aui .portlet-msg-success{
+	padding: 8px 8px 8px 14px;
+	color:#555;
+	margin-bottom: 0;
+}
+
+#slide_status {
+	position: fixed;
+	width: 100%;
+    z-index: 9000;
+    display: none;
+    top: 0;
+    left: 0;
+    text-align: center;
+     
+     
+   /*  padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9000;
+    text-align: center;
+    display: none;
+    font-weight: bold;
+    color: #f2a520;
+    background-color: #fffbe7;
+    border: 1px solid #ffd179;
+    border-radius: 7px; */
+}
+
+/* #btnCloseSlide {
+    color: #ffc376;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 5px;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+} */
+
+.aui input[type="color"], .aui input[type="date"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"], .aui input[type="number"], .aui input[type="password"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="text"], .aui input[type="time"], .aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea, .aui .uneditable-input{
+	margin-bottom: 0px;
+}
+
+.actionplan_input{
+	display:none;
+}
+.jqstooltip{
+	display:none;
+}
+#jqstooltip{
+	display:none;
+}
+.ganntChartTititle{
+    border: 1px solid #f1d875;
+}
+
+/* Modal action plan END */
+
+.aui .ca-menu li{
+    line-height: 0px;
+}
+
+.aui .appraisal_result .popover{
+	width:120px;
+}
+
+.aui select, .aui input[type="text"] {
+    font-size: 13px;
+}
+.aui .infoItem:hover{
+	background-color:#71cccc !important;
+}
