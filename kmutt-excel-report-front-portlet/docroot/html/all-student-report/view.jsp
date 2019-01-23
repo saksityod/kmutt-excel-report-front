@@ -61,6 +61,16 @@
 					</select>
 				</div>
 				<div class="form-group pull-left span3" style="margin-left: 5px">
+					<select data-original-title="Department Name" data-toggle="tooltip" title="" class="input span12 m-b-n" id="param_department" name="param_department" style="cursor: pointer;">
+						<option  value="">All Department Name</option>
+					</select>
+				</div>
+				<div class="form-group pull-left span3" style="margin-left: 5px">
+					<select data-original-title="Education Name" data-toggle="tooltip" title="" class="input span12 m-b-n" id="param_education" name="param_education" style="cursor: pointer;">
+						<option  value="">All Education Name</option>
+					</select>
+				</div>
+				<div class="form-group pull-left span3" style="margin-left: 5px">
 					<select name="param_type" id="param_type" class="input form-control input-sm span12 m-b-n" title="" data-toggle="tooltip" data-original-title="Output Type" style="cursor: pointer;" >
 						<option value="pdf">PDF</option> 
 						<option value="xlsx">Excel</option> 

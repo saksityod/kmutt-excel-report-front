@@ -1,5 +1,7 @@
 var restfulPathDropDownYear="/"+serviceName+"/public/AllStudent/YearList";
 var restfulPathDropDownFaculty="/"+serviceName+"/public/AllStudent/FacultyList";
+var restfulPathDropDownDepartment="/"+serviceName+"/public/AllStudent/DepartmentList";
+var restfulPathDropDownEducation="/"+serviceName+"/public/AllStudent/EducationList";
 var restfulPathImportExcel ="/"+serviceName+"/public/AllStudent/Import";
 var restfulPathExportExcel ="/"+serviceName+"/public/AllStudent/Export";
 
@@ -10,13 +12,17 @@ var gerReportFn = function() {
 	 
 	var param_year= $("#param_year").val();
 	var param_faculty= $("#param_faculty").val();
+	var param_department= $("#param_department").val();
+	var param_education= $("#param_education").val();
 	var param_type = $("#param_type").val();
 	var parameter = {};
 	var template_name ="";
 	
 	parameter = {
 			param_year:param_year,
-			param_faculty_name:param_faculty
+			param_faculty_name:param_faculty,
+			param_department_name:param_department,
+			param_education:param_education
 	};
 	
 	  var data = JSON.stringify(parameter);
@@ -64,6 +70,51 @@ var dropDownListFaculty = function(){
 					html+="<option  value='"+indexEntry["faculty_name"]+"'>"+indexEntry["faculty_name"]+"</option>";	
 			});
 			$("#param_faculty").html(html);
+			dropDownListDepartment();
+		}
+	});	
+};
+
+var dropDownListDepartment = function(){
+	var html="";
+	$.ajax ({
+		url:restfulURL+restfulPathDropDownDepartment,
+		type:"get" ,
+		data: { 
+			param_year:$("#param_year").val(),
+			param_faculty:$("#param_faculty").val()
+		},
+		dataType:"json" ,
+		async:true,
+		success:function(data){
+			html+="<option value=''>All Department Name</option>";
+			$.each(data,function(index,indexEntry){
+					html+="<option  value='"+indexEntry["department_name"]+"'>"+indexEntry["department_name"]+"</option>";	
+			});
+			$("#param_department").html(html);
+			dropDownListEducation();
+		}
+	});	
+};
+
+var dropDownListEducation = function(){
+	var html="";
+	$.ajax ({
+		url:restfulURL+restfulPathDropDownEducation,
+		type:"get" ,
+		data: { 
+			param_year:$("#param_year").val(),
+			param_faculty:$("#param_faculty").val(),
+			param_department:$("#param_department").val()
+		},
+		dataType:"json" ,
+		async:true,
+		success:function(data){
+			html+="<option value='0'>All Education Name</option>";
+			$.each(data,function(index,indexEntry){
+					html+="<option  value='"+indexEntry["education_id"]+"'>"+indexEntry["education_name"]+"</option>";	
+			});
+			$("#param_education").html(html);
 		}
 	});	
 };
@@ -92,7 +143,16 @@ $(document).ready(function() {
 	
 	$("#param_year").change(function () {
 		dropDownListFaculty();
+		
+		$("#param_faculty").change(function () {
+			dropDownListDepartment();
+			
+			$("#param_department").change(function () {
+				dropDownListEducation();
+			});
+		});
 	});
+	
 	
 	$("#btnSearchAdvance").click(function () {
 		gerReportFn();
