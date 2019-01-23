@@ -1,7 +1,7 @@
-var restfulPathDropDownYear = apiURL+"/Honor/YearList";
-var restfulPathDropDownFaculty = apiURL+"/Honor/FacultyList";
-var restfulPathImportExcel = apiURL+"/Honor/Import/HonorBachelor";
-var restfulPathExportExcel = apiURL+"/Honor/Export";
+var restfulPathDropDownYear = apiURL+"/AllStudent/YearList";
+var restfulPathDropDownFaculty = apiURL+"/AllStudent/FacultyList";
+var restfulPathImportExcel = apiURL+"/AllStudent/Import";
+var restfulPathExportExcel = apiURL+"/AllStudent/Export";
 
 var files;
 
@@ -20,7 +20,7 @@ var gerReportFn = function() {
 	};
 	
 	  var data = JSON.stringify(parameter);
-	  var url_report_jasper = apiURL+"/generate?template_name=honor_bachelor_report&template_format="+param_type+"&used_connection=1&inline=1&data="+data;
+	  var url_report_jasper = apiURL+"/generate?template_name=all_student_report&template_format="+param_type+"&used_connection=1&inline=1&data="+data;
 	  
 	  console.log(url_report_jasper);
 	  
@@ -78,12 +78,6 @@ $(document).ready(function() {
       $('[data-toggle="tooltip"]').tooltip({
           html: true
       });
-      
-/*      
-	$("#exportToExcel").click(function(){
-		$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/import-honor-bachelor-template.xlsx");
-	});
-*/
       
       $("#exportToExcel").click(function(){
     		var param="";

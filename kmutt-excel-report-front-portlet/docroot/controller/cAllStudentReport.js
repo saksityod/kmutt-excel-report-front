@@ -1,9 +1,9 @@
-var restfulPathDropDownYear="/"+serviceName+"/public/AllStudent/YearList";
-var restfulPathDropDownFaculty="/"+serviceName+"/public/AllStudent/FacultyList";
-var restfulPathDropDownDepartment="/"+serviceName+"/public/AllStudent/DepartmentList";
-var restfulPathDropDownEducation="/"+serviceName+"/public/AllStudent/EducationList";
-var restfulPathImportExcel ="/"+serviceName+"/public/AllStudent/Import";
-var restfulPathExportExcel ="/"+serviceName+"/public/AllStudent/Export";
+var restfulPathDropDownYear = apiURL+"/AllStudent/YearList";
+var restfulPathDropDownFaculty = apiURL+"/AllStudent/FacultyList";
+var restfulPathDropDownDepartment=apiURL+"/AllStudent/DepartmentList";
+var restfulPathDropDownEducation=apiURL+"/AllStudent/EducationList";
+var restfulPathImportExcel = apiURL+"/AllStudent/Import";
+var restfulPathExportExcel = apiURL+"/AllStudent/Export";
 
 var files;
 
@@ -26,7 +26,7 @@ var gerReportFn = function() {
 	};
 	
 	  var data = JSON.stringify(parameter);
-	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generate?template_name=all_student_report&template_format="+param_type+"&used_connection=1&inline=1&data="+data;
+	  var url_report_jasper = apiURL+"/generate?template_name=all_student_report&template_format="+param_type+"&used_connection=1&inline=1&data="+data;
 	  
 	  console.log(url_report_jasper);
 	  
@@ -41,7 +41,7 @@ var gerReportFn = function() {
 var dropDownListYear = function(){
 	var html="";
 	$.ajax ({
-		url:restfulURL+restfulPathDropDownYear,
+		url:restfulPathDropDownYear,
 		type:"get" ,
 		dataType:"json" ,
 		async:true,
@@ -59,7 +59,7 @@ var dropDownListYear = function(){
 var dropDownListFaculty = function(){
 	var html="";
 	$.ajax ({
-		url:restfulURL+restfulPathDropDownFaculty,
+		url:restfulPathDropDownFaculty,
 		type:"get" ,
 		data: { param_year:$("#param_year").val() },
 		dataType:"json" ,
@@ -78,7 +78,7 @@ var dropDownListFaculty = function(){
 var dropDownListDepartment = function(){
 	var html="";
 	$.ajax ({
-		url:restfulURL+restfulPathDropDownDepartment,
+		url:restfulPathDropDownDepartment,
 		type:"get" ,
 		data: { 
 			param_year:$("#param_year").val(),
@@ -89,7 +89,7 @@ var dropDownListDepartment = function(){
 		success:function(data){
 			html+="<option value=''>All Department Name</option>";
 			$.each(data,function(index,indexEntry){
-					html+="<option  value='"+indexEntry["department_name"]+"'>"+indexEntry["department_name"]+"</option>";	
+				html+="<option  value='"+indexEntry["department_name"]+"'>"+indexEntry["department_name"]+"</option>";	
 			});
 			$("#param_department").html(html);
 			dropDownListEducation();
@@ -100,7 +100,7 @@ var dropDownListDepartment = function(){
 var dropDownListEducation = function(){
 	var html="";
 	$.ajax ({
-		url:restfulURL+restfulPathDropDownEducation,
+		url:restfulPathDropDownEducation,
 		type:"get" ,
 		data: { 
 			param_year:$("#param_year").val(),
@@ -135,7 +135,7 @@ $(document).ready(function() {
     		param+="param_year="+$("#param_year").val();
     		param+="&param_faculty="+$("#param_faculty").val();
 
-    		$("form#formExportToExcel").attr("action",restfulURL+restfulPathExportExcel+"?"+param);
+    		$("form#formExportToExcel").attr("action",restfulPathExportExcel+"?"+param);
     	});
 	
    
@@ -152,7 +152,6 @@ $(document).ready(function() {
 			});
 		});
 	});
-	
 	
 	$("#btnSearchAdvance").click(function () {
 		gerReportFn();
@@ -194,7 +193,7 @@ $(document).ready(function() {
 		 data.append('user', $("#user_portlet").val());
 		$("body").mLoading();
 		$.ajax({
-			url:restfulURL+restfulPathImportExcel,
+			url:restfulPathImportExcel,
 			type: 'POST',
 			data: data,
 			cache: false,
