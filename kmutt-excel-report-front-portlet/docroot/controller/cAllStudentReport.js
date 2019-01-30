@@ -22,11 +22,12 @@ var gerReportFn = function() {
 			param_year:param_year,
 			param_faculty_name:param_faculty,
 			param_department_name:param_department,
-			param_education:param_education
+			param_education:param_education,
+			param_type:param_type
 	};
 	
 	  var data = JSON.stringify(parameter);
-	  var url_report_jasper = apiURL+"/generate?template_name=all_student_report&template_format="+param_type+"&used_connection=1&inline=1&data="+data;
+	  var url_report_jasper = apiURL+"/generate?template_name=all_student_report&template_format="+param_type+"&used_connection=1&inline=1&data="+data+"&subreport_bundle=1";
 	  
 	  console.log(url_report_jasper);
 	  
@@ -134,6 +135,8 @@ $(document).ready(function() {
     		var param="";
     		param+="param_year="+$("#param_year").val();
     		param+="&param_faculty="+$("#param_faculty").val();
+    		param+="&param_department="+$("#param_department").val();
+    		param+="&param_education="+$("#param_education").val();
 
     		$("form#formExportToExcel").attr("action",restfulPathExportExcel+"?"+param);
     	});
@@ -143,16 +146,13 @@ $(document).ready(function() {
 	
 	$("#param_year").change(function () {
 		dropDownListFaculty();
-		
-		$("#param_faculty").change(function () {
-			dropDownListDepartment();
-			
-			$("#param_department").change(function () {
-				dropDownListEducation();
-			});
-		});
 	});
-	
+	$("#param_faculty").change(function () {
+		dropDownListDepartment();
+	});
+	$("#param_department").change(function () {
+		dropDownListEducation();
+	});
 	$("#btnSearchAdvance").click(function () {
 		gerReportFn();
 	});
