@@ -13,5 +13,6 @@
 		<portlet id="all-student-percent-report"></portlet>
 		<portlet id="graduate-student-report"></portlet>
 		<portlet id="graduate-student-percent-report"></portlet>
+		<portlet id="report-operation-permissions"></portlet>
 	</category>
 </display>

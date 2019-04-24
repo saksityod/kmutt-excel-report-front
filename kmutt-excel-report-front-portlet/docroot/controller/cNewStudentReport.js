@@ -1,4 +1,5 @@
-var restfulPathDropDownYear = apiURL+"/NewStudent/YearList";
+var restfulPathCheckRoleUser = apiURL+"/NewStudent/CheckRoleUser";
+var restfulPathDropDownYear = apiURL+"/NewStudent/YearList"; 
 var restfulPathDropDownFaculty = apiURL+"/NewStudent/FacultyList";
 var restfulPathDropDownDepartment=apiURL+"/NewStudent/DepartmentList";
 var restfulPathDropDownEducation=apiURL+"/NewStudent/EducationList";
@@ -37,6 +38,40 @@ var gerReportFn = function() {
 			$('#iFrame_report').attr('src',url_report_jasper);
 		}
 	$("body").mLoading('hide'); //Loading
+};
+
+var checkRoleUser = function(){
+	$.ajax ({
+		url:restfulPathCheckRoleUser,
+		type:"get" ,
+		data: { 
+			user:$("#user_portlet").val(),
+			report: "new"
+		},
+		dataType:"json" ,
+		async:true,
+		success:function(data){
+			if (data['status'] == 400){
+				alertFn("alert-error", "Sorry! ", data['error']);
+			}
+			
+			$.each(data['data'],function(index,indexEntry){
+				// button Import
+				if(indexEntry["is_import"] > 0)	{
+					$('#btn_import').prop('disabled', false);
+				}else if (indexEntry["is_import"] == 0){
+					$('#btn_import').prop('disabled', true);
+				}
+				
+				// button Download
+				if(indexEntry["is_export"] > 0)	{
+					$('#exportToExcel').prop('disabled', false);
+				}else if (indexEntry["is_export"] == 0){
+					$('#exportToExcel').prop('disabled', true);
+				}
+			});
+		}
+	});	
 };
 
 var dropDownListYear = function(){
@@ -140,7 +175,8 @@ $(document).ready(function() {
 
     		$("form#formExportToExcel").attr("action",restfulPathExportExcel+"?"+param);
     	});
-	
+      
+  	checkRoleUser();
    
 	dropDownListYear();
 	
@@ -156,6 +192,7 @@ $(document).ready(function() {
 	$("#btnSearchAdvance").click(function () {
 		gerReportFn();
 	});
+	
 	
 	$("#btn_import").click(function () {
 		$("#ModalImport").modal({
