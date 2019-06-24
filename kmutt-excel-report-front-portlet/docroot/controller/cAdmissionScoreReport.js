@@ -1,10 +1,8 @@
-var restfulPathCheckRoleUser = apiURL+"/AllStudent/CheckRoleUser";
-var restfulPathDropDownYear = apiURL+"/AllStudent/YearList";
-var restfulPathDropDownFaculty = apiURL+"/AllStudent/FacultyList";
-var restfulPathDropDownDepartment=apiURL+"/AllStudent/DepartmentList";
-var restfulPathDropDownEducation=apiURL+"/AllStudent/EducationList";
-var restfulPathImportExcel = apiURL+"/AllStudent/Import";
-var restfulPathExportExcel = apiURL+"/AllStudent/Export";
+var restfulPathCheckRoleUser = apiURL+"/AdmissionScore/CheckRoleUser";
+var restfulPathDropDownYear = apiURL+"/AdmissionScore/YearList";
+var restfulPathDropDownFacultyField = apiURL+"/AdmissionScore/FacultyFieldList";
+var restfulPathImportExcel = apiURL+"/AdmissionScore/Import";
+var restfulPathExportExcel = apiURL+"/AdmissionScore/Export";
 
 var files;
 
@@ -12,23 +10,19 @@ var gerReportFn = function() {
 	$("body").mLoading('show'); //Loading
 	 
 	var param_year= $("#param_year").val();
-	var param_faculty= $("#param_faculty").val();
-	var param_department= $("#param_department").val();
-	var param_education= $("#param_education").val();
+	var param_faculty_field= $("#param_faculty_field").val();
 	var param_type = $("#param_type").val();
 	var parameter = {};
 	var template_name ="";
 	
 	parameter = {
 			param_year:param_year,
-			param_faculty_name:param_faculty,
-			param_department_name:param_department,
-			param_education:param_education,
+			param_faculty_field_name:param_faculty_field,
 			param_type:param_type
 	};
 	
 	  var data = JSON.stringify(parameter);
-	  var url_report_jasper = apiURL+"/generate?template_name=all_student_report&template_format="+param_type+"&used_connection=1&inline=1&data="+data+"&subreport_bundle=1";
+	  var url_report_jasper = apiURL+"/generate?template_name=admission_score_report&template_format="+param_type+"&used_connection=1&inline=1&data="+data+"&subreport_bundle=0";
 	  
 	  console.log(url_report_jasper);
 	  
@@ -46,7 +40,7 @@ var checkRoleUser = function(){
 		type:"get" ,
 		data: { 
 			user:$("#user_portlet").val(),
-			report: "all"
+			report: "admission_score"
 		},
 		dataType:"json" ,
 		async:true,
@@ -87,72 +81,25 @@ var dropDownListYear = function(){
 					html+="<option  value='"+indexEntry["academic_year"]+"'>"+indexEntry["academic_year"]+"</option>";	
 			});
 			$("#param_year").html(html);
-			dropDownListEducation();
+			dropDownListFacultyField();
 		}
 	});	
 };
 
-var dropDownListEducation = function(){
+var dropDownListFacultyField = function(){
 	var html="";
 	$.ajax ({
-		url:restfulPathDropDownEducation,
+		url:restfulPathDropDownFacultyField,
 		type:"get" ,
-		data: { 
-			param_year:$("#param_year").val()
-		},
+		data: { param_year:$("#param_year").val() },
 		dataType:"json" ,
 		async:true,
 		success:function(data){
-			html+="<option value='0'>ระดับการศึกษาทั้งหมด</option>";
+			html+="<option value=''>คณะ/สาขาทั้งหมด</option>";
 			$.each(data,function(index,indexEntry){
-					html+="<option  value='"+indexEntry["education_id"]+"'>"+indexEntry["education_name"]+"</option>";	
+					html+="<option  value='"+indexEntry["faculty_field_name"]+"'>"+indexEntry["faculty_field_name"]+"</option>";	
 			});
-			$("#param_education").html(html);
-			dropDownListFaculty();
-		}
-	});	
-};
-
-var dropDownListFaculty = function(){
-	var html="";
-	$.ajax ({
-		url:restfulPathDropDownFaculty,
-		type:"get" ,
-		data: { 
-			param_year:$("#param_year").val(),
-			param_education:$("#param_education").val()
-		},
-		dataType:"json" ,
-		async:true,
-		success:function(data){
-			html+="<option value=''>คณะทั้งหมด</option>";
-			$.each(data,function(index,indexEntry){
-					html+="<option  value='"+indexEntry["faculty_name"]+"'>"+indexEntry["faculty_name"]+"</option>";	
-			});
-			$("#param_faculty").html(html);
-			dropDownListDepartment();
-		}
-	});	
-};
-
-var dropDownListDepartment = function(){
-	var html="";
-	$.ajax ({
-		url:restfulPathDropDownDepartment,
-		type:"get" ,
-		data: { 
-			param_year:$("#param_year").val(),
-			param_faculty:$("#param_faculty").val(),
-			param_education:$("#param_education").val()
-		},
-		dataType:"json" ,
-		async:true,
-		success:function(data){
-			html+="<option value=''>ภาคทั้งหมด</option>";
-			$.each(data,function(index,indexEntry){
-				html+="<option  value='"+indexEntry["department_name"]+"'>"+indexEntry["department_name"]+"</option>";	
-			});
-			$("#param_department").html(html);
+			$("#param_faculty_field").html(html);
 		}
 	});	
 };
@@ -171,9 +118,7 @@ $(document).ready(function() {
       $("#exportToExcel").click(function(){
     		var param="";
     		param+="param_year="+$("#param_year").val();
-    		param+="&param_faculty="+$("#param_faculty").val();
-    		param+="&param_department="+$("#param_department").val();
-    		param+="&param_education="+$("#param_education").val();
+    		param+="&param_faculty_field="+$("#param_faculty_field").val();
 
     		$("form#formExportToExcel").attr("action",restfulPathExportExcel+"?"+param);
     	});
@@ -183,13 +128,7 @@ $(document).ready(function() {
 	dropDownListYear();
 	
 	$("#param_year").change(function () {
-		dropDownListEducation();
-	});
-	$("#param_education").change(function () {
-		dropDownListFaculty();
-	});
-	$("#param_faculty").change(function () {
-		dropDownListDepartment();
+		dropDownListFacultyField();
 	});
 	$("#btnSearchAdvance").click(function () {
 		gerReportFn();

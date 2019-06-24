@@ -1,8 +1,8 @@
 var restfulPathCheckRoleUser = apiURL+"/NewStudent/CheckRoleUser";
 var restfulPathDropDownYear = apiURL+"/NewStudent/YearList";
+var restfulPathDropDownEducation=apiURL+"/NewStudent/EducationList";
 var restfulPathDropDownFaculty = apiURL+"/NewStudent/FacultyList";
 var restfulPathDropDownDepartment=apiURL+"/NewStudent/DepartmentList";
-var restfulPathDropDownEducation=apiURL+"/NewStudent/EducationList";
 var restfulPathImportExcel = apiURL+"/NewStudent/Import/Percent";
 var restfulPathExportExcel = apiURL+"/NewStudent/Export/Percent";
 
@@ -82,11 +82,32 @@ var dropDownListYear = function(){
 		dataType:"json" ,
 		async:true,
 		success:function(data){
-			html+="<option value=''>All Year</option>";
+			html+="<option value=''>ปีการศึกษาทั้งหมด</option>";
 			$.each(data,function(index,indexEntry){
 					html+="<option  value='"+indexEntry["academic_year"]+"'>"+indexEntry["academic_year"]+"</option>";	
 			});
 			$("#param_year").html(html);
+			dropDownListEducation();
+		}
+	});	
+};
+
+var dropDownListEducation = function(){
+	var html="";
+	$.ajax ({
+		url:restfulPathDropDownEducation,
+		type:"get" ,
+		data: { 
+			param_year:$("#param_year").val()
+		},
+		dataType:"json" ,
+		async:true,
+		success:function(data){
+			html+="<option value='0'>ระดับการศึกษาทั้งหมด</option>";
+			$.each(data,function(index,indexEntry){
+					html+="<option  value='"+indexEntry["education_id"]+"'>"+indexEntry["education_name"]+"</option>";	
+			});
+			$("#param_education").html(html);
 			dropDownListFaculty();
 		}
 	});	
@@ -97,11 +118,14 @@ var dropDownListFaculty = function(){
 	$.ajax ({
 		url:restfulPathDropDownFaculty,
 		type:"get" ,
-		data: { param_year:$("#param_year").val() },
+		data: { 
+			param_year:$("#param_year").val(),
+			param_education:$("#param_education").val()
+		},
 		dataType:"json" ,
 		async:true,
 		success:function(data){
-			html+="<option value=''>All Faculty Name</option>";
+			html+="<option value=''>คณะทั้งหมด</option>";
 			$.each(data,function(index,indexEntry){
 					html+="<option  value='"+indexEntry["faculty_name"]+"'>"+indexEntry["faculty_name"]+"</option>";	
 			});
@@ -118,39 +142,17 @@ var dropDownListDepartment = function(){
 		type:"get" ,
 		data: { 
 			param_year:$("#param_year").val(),
-			param_faculty:$("#param_faculty").val()
+			param_faculty:$("#param_faculty").val(),
+			param_education:$("#param_education").val()
 		},
 		dataType:"json" ,
 		async:true,
 		success:function(data){
-			html+="<option value=''>All Department Name</option>";
+			html+="<option value=''>ภาคทั้งหมด</option>";
 			$.each(data,function(index,indexEntry){
 				html+="<option  value='"+indexEntry["department_name"]+"'>"+indexEntry["department_name"]+"</option>";	
 			});
 			$("#param_department").html(html);
-			dropDownListEducation();
-		}
-	});	
-};
-
-var dropDownListEducation = function(){
-	var html="";
-	$.ajax ({
-		url:restfulPathDropDownEducation,
-		type:"get" ,
-		data: { 
-			param_year:$("#param_year").val(),
-			param_faculty:$("#param_faculty").val(),
-			param_department:$("#param_department").val()
-		},
-		dataType:"json" ,
-		async:true,
-		success:function(data){
-			html+="<option value='0'>All Education Name</option>";
-			$.each(data,function(index,indexEntry){
-					html+="<option  value='"+indexEntry["education_id"]+"'>"+indexEntry["education_name"]+"</option>";	
-			});
-			$("#param_education").html(html);
 		}
 	});	
 };
@@ -181,13 +183,13 @@ $(document).ready(function() {
 	dropDownListYear();
 	
 	$("#param_year").change(function () {
+		dropDownListEducation();
+	});
+	$("#param_education").change(function () {
 		dropDownListFaculty();
 	});
 	$("#param_faculty").change(function () {
 		dropDownListDepartment();
-	});
-	$("#param_department").change(function () {
-		dropDownListEducation();
 	});
 	$("#btnSearchAdvance").click(function () {
 		gerReportFn();

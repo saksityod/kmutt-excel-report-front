@@ -346,6 +346,10 @@ form {
 									<option value="Graduate Student Report">Graduate Student Report</option>
 									<option value="Graduate Student Report (%)">Graduate Student Report (%)</option>
 									<option value="Honor Bachelor Report">Honor Bachelor Report</option>
+									<option value="Bachelor Admission Report">Bachelor Admission Report</option>
+									<option value="Master PhD Admission Report">Master PhD Admission Report</option>
+									<option value="Admission Score Report">Admission Score Report</option>
+									<option value="FTES Report">FTES Report</option>
 								</select>
 							</div>
 						</div>

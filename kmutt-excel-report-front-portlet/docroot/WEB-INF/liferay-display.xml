@@ -14,5 +14,9 @@
 		<portlet id="graduate-student-report"></portlet>
 		<portlet id="graduate-student-percent-report"></portlet>
 		<portlet id="report-operation-permissions"></portlet>
+		<portlet id="bachelor-admission-report"></portlet>
+		<portlet id="master-phd-admission-report"></portlet>
+		<portlet id="ftes-report"></portlet>
+		<portlet id="admission-score-report"></portlet>
 	</category>
 </display>

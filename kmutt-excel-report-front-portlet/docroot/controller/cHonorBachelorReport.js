@@ -75,7 +75,7 @@ var dropDownListYear = function(){
 		dataType:"json" ,
 		async:true,
 		success:function(data){
-			html+="<option value=''>All Year</option>";
+			html+="<option value=''>ปีการศึกษาทั้งหมด</option>";
 			$.each(data,function(index,indexEntry){
 					html+="<option  value='"+indexEntry["academic_year"]+"'>"+indexEntry["academic_year"]+"</option>";	
 			});
@@ -94,7 +94,7 @@ var dropDownListFaculty = function(){
 		dataType:"json" ,
 		async:true,
 		success:function(data){
-			html+="<option value=''>All Faculty Name</option>";
+			html+="<option value=''>คณะทั้งหมด</option>";
 			$.each(data,function(index,indexEntry){
 					html+="<option  value='"+indexEntry["faculty_name"]+"'>"+indexEntry["faculty_name"]+"</option>";	
 			});

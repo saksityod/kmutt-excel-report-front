@@ -53,7 +53,7 @@
 		
 			<div class="row-fluid ">
 				<!-- <div id="drop_down_organization" class="form-group pull-left span3" style="margin-left: 5px">
-					<select data-original-title="Year" data-toggle="tooltip" title="" class="input span12 m-b-n" id="param_year" name="param_year" style="cursor: pointer;"></select>
+					<select data-original-title="ปีการศึกษา" data-toggle="tooltip" title="" class="input span12 m-b-n" id="param_year" name="param_year" style="cursor: pointer;"></select>
 				</div> -->
 				<div class="form-group pull-left span3" style="margin-left: 5px">
 					<select data-original-title="ปีการศึกษา" data-toggle="tooltip" title="" class="input span12 m-b-n" id="param_year" name="param_year" style="cursor: pointer;">
@@ -61,8 +61,8 @@
 					</select>
 				</div>
 				<div class="form-group pull-left span3" style="margin-left: 5px">
-					<select data-original-title="ระดับการศึกษา" data-toggle="tooltip" title="" class="input span12 m-b-n" id="param_education" name="param_education" style="cursor: pointer;">
-						<option  value="">ระดับการศึกษาทั้งหมด</option>
+					<select data-original-title="ภาคการศึกษา" data-toggle="tooltip" title="" class="input span12 m-b-n" id="param_semester" name="param_semester" style="cursor: pointer;">
+						<option  value="">ภาคการศึกษาทั้งหมด</option>
 					</select>
 				</div>
 				<div class="form-group pull-left span3" style="margin-left: 5px">
